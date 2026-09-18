@@ -1,0 +1,54 @@
+# Built application files
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Files for the ART/Dalvik VM
+*.dex
+
+# Java class files
+*.class
+
+# Generated files
+bin/
+gen/
+out/
+build/
+app/build/
+
+# Gradle files
+.gradle/
+buildOutputCleanup/
+
+# Local configuration file (contains machine-specific SDK paths)
+local.properties
+
+# Proguard folder
+proguard/
+
+# Log files
+*.log
+
+# Android Studio temp and cache files
+.navigation/
+captures/
+*.iml
+.idea/caches/
+.idea/libraries/
+.idea/modules.xml
+.idea/workspace.xml
+.idea/navEditor.xml
+.idea/assetWizardSettings.xml
+
+# Keystore files
+*.jks
+*.keystore
+
+# CMake / C++ builds
+.externalNativeBuild
+.cxx/
+
+# OS-specific
+.DS_Store
+Thumbs.db

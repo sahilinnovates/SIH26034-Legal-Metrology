@@ -132,6 +132,7 @@ private const val TAG = "ScanScreen"
 fun ScanScreen(
     packageType: String,
     category: String,
+    productName: String,
     onProceedToReview: (String) -> Unit,
     onBack: () -> Unit
 ) {
@@ -329,6 +330,7 @@ fun ScanScreen(
             TopHud(
                 packageType = packageType,
                 category = category,
+                productName = productName,
                 scanState = scanState,
                 onBack = onBack
             )
@@ -561,6 +563,7 @@ private fun ArScanOverlay(scanState: ScanState) {
 private fun TopHud(
     packageType: String,
     category: String,
+    productName: String,
     scanState: ScanState,
     onBack: () -> Unit
 ) {
@@ -636,6 +639,32 @@ private fun TopHud(
                     Box(modifier = Modifier.size(8.dp).background(dotColor, CircleShape))
                     Spacer(Modifier.width(6.dp))
                     Text(pillLabel, style = MaterialTheme.typography.labelSmall, color = Color.White)
+                }
+            }
+        }
+
+        // Product name card (always visible)
+        if (productName.isNotEmpty()) {
+            Spacer(Modifier.height(8.dp))
+            Card(
+                colors = CardDefaults.cardColors(containerColor = ArGlassPanel),
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Column(
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 12.dp, vertical = 8.dp)
+                ) {
+                    Text(
+                        "Product",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color.White.copy(0.6f)
+                    )
+                    Text(
+                        productName,
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = Color.White,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 }
             }
         }

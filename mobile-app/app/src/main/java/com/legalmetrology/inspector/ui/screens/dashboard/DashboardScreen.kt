@@ -19,8 +19,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,10 +27,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.QrCodeScanner
 import androidx.compose.material.icons.filled.ScreenShare
 import androidx.compose.material.icons.filled.Shield
-import androidx.compose.material.icons.filled.TrendingUp
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -47,20 +43,18 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.legalmetrology.inspector.ui.theme.Amber500
-import com.legalmetrology.inspector.ui.theme.Coral500
-import com.legalmetrology.inspector.ui.theme.Emerald500
-import com.legalmetrology.inspector.ui.theme.Indigo500
-import com.legalmetrology.inspector.ui.theme.Navy700
-import com.legalmetrology.inspector.ui.theme.Navy800
-import com.legalmetrology.inspector.ui.theme.Navy900
+import com.legalmetrology.inspector.ui.theme.Amber600
+import com.legalmetrology.inspector.ui.theme.Cobalt600
+import com.legalmetrology.inspector.ui.theme.Crimson600
+import com.legalmetrology.inspector.ui.theme.Emerald600
+import com.legalmetrology.inspector.ui.theme.Slate100
+import com.legalmetrology.inspector.ui.theme.Slate950
+import com.legalmetrology.inspector.ui.theme.TextSecondary
 import kotlin.math.roundToInt
 
 /**
@@ -85,15 +79,7 @@ fun DashboardScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(
-                Brush.verticalGradient(
-                    colorStops = arrayOf(
-                        0f to Navy900,
-                        0.4f to Indigo500.copy(alpha = 0.08f),
-                        1f to Navy900
-                    )
-                )
-            )
+            .background(Slate100)
     ) {
         Column(
             modifier = Modifier
@@ -105,48 +91,74 @@ fun DashboardScreen(
         ) {
             // Header
             Row(
-                modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+                modifier = Modifier.fillMaxWidth().padding(top = 16.dp, bottom = 24.dp),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier
-                            .size(44.dp)
-                            .background(Indigo500, CircleShape),
+                            .size(48.dp)
+                            .background(Slate950, CircleShape),
                         contentAlignment = Alignment.Center
                     ) {
-                        Icon(Icons.Default.Shield, null, tint = Color.White, modifier = Modifier.size(22.dp))
+                        Icon(
+                            Icons.Default.Shield,
+                            null,
+                            tint = Color.White,
+                            modifier = Modifier.size(24.dp)
+                        )
                     }
                     Spacer(Modifier.width(12.dp))
                     Column {
-                        Text("Good morning,", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                        Text("Rajesh Kumar", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                        Text("OFFICER · South Delhi", style = MaterialTheme.typography.labelSmall, color = Indigo500)
+                        Text(
+                            "Good morning,",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = TextSecondary
+                        )
+                        Text(
+                            "Rajesh Kumar",
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.onBackground
+                        )
+                        Text(
+                            "OFFICER · South Delhi",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Cobalt600,
+                            fontWeight = FontWeight.SemiBold
+                        )
                     }
                 }
                 IconButton(onClick = onLogout) {
-                    Icon(Icons.Default.ExitToApp, "Logout", tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Icon(
+                        Icons.Default.ExitToApp,
+                        "Logout",
+                        tint = TextSecondary
+                    )
                 }
             }
-
-            Spacer(Modifier.height(24.dp))
 
             // Stats row (animated count-up)
             LazyRow(
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
                 contentPadding = PaddingValues(0.dp)
             ) {
-                item { AnimatedStatCard("Total Scans", 247, Indigo500) }
-                item { AnimatedStatCard("Violations Found", 31, Coral500) }
-                item { AnimatedStatCard("Compliant", 198, Emerald500) }
-                item { AnimatedStatCard("Pending Review", 18, Amber500) }
+                item { AnimatedStatCard("Total Scans", 247, Cobalt600) }
+                item { AnimatedStatCard("Violations Found", 31, Crimson600) }
+                item { AnimatedStatCard("Compliant", 198, Emerald600) }
+                item { AnimatedStatCard("Pending Review", 18, Amber600) }
             }
 
-            Spacer(Modifier.height(28.dp))
+            Spacer(Modifier.height(32.dp))
 
             // Quick actions
-            Text("Quick Actions", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text(
+                "Quick Actions",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
             Spacer(Modifier.height(12.dp))
 
             // Primary CTA
@@ -154,45 +166,57 @@ fun DashboardScreen(
                 onClick = onStartNewInspection,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(64.dp),
+                    .height(72.dp)
+                    .shadow(
+                        elevation = 8.dp,
+                        shape = RoundedCornerShape(16.dp),
+                        spotColor = Cobalt600.copy(alpha = 0.2f)
+                    ),
                 shape = RoundedCornerShape(16.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Transparent
+                    containerColor = Cobalt600
                 ),
                 contentPadding = PaddingValues(0.dp)
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .background(
-                            Brush.horizontalGradient(listOf(Indigo500, Indigo500.copy(0.7f))),
-                            RoundedCornerShape(16.dp)
-                        ),
-                    contentAlignment = Alignment.Center
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier.padding(horizontal = 20.dp)
                 ) {
-                    Row(verticalAlignment = Alignment.CenterVertically) {
-                        Icon(Icons.Default.Add, null, tint = Color.White, modifier = Modifier.size(24.dp))
-                        Spacer(Modifier.width(12.dp))
-                        Column {
-                            Text("New Physical Inspection", fontWeight = FontWeight.Bold, color = Color.White)
-                            Text("AR camera + field detection", style = MaterialTheme.typography.labelSmall, color = Color.White.copy(0.8f))
-                        }
+                    Icon(
+                        Icons.Default.Add,
+                        null,
+                        tint = Color.White,
+                        modifier = Modifier.size(28.dp)
+                    )
+                    Spacer(Modifier.width(16.dp))
+                    Column {
+                        Text(
+                            "New Physical Inspection",
+                            fontWeight = FontWeight.Bold,
+                            color = Color.White,
+                            style = MaterialTheme.typography.titleSmall
+                        )
+                        Text(
+                            "AR camera + field detection",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = Color.White.copy(0.9f)
+                        )
                     }
                 }
             }
 
-            Spacer(Modifier.height(10.dp))
+            Spacer(Modifier.height(12.dp))
 
             // Secondary actions grid
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(10.dp)
+                horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 ActionCard(
                     icon = Icons.Default.ScreenShare,
                     title = "E-Commerce",
                     subtitle = "Check online listing",
-                    color = Amber500,
+                    color = Amber600,
                     modifier = Modifier.weight(1f),
                     onClick = onECommerceInspection
                 )
@@ -200,37 +224,65 @@ fun DashboardScreen(
                     icon = Icons.Default.History,
                     title = "History",
                     subtitle = "Past inspections",
-                    color = Emerald500,
+                    color = Emerald600,
                     modifier = Modifier.weight(1f),
                     onClick = onViewHistory
                 )
             }
 
-            Spacer(Modifier.height(28.dp))
+            Spacer(Modifier.height(32.dp))
 
             // Recent violations
-            Text("Recent Violations", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
+            Text(
+                "Recent Violations",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onBackground
+            )
             Spacer(Modifier.height(12.dp))
 
             listOf(
-                Triple("Lays Classic 26g · MRP font 1.8mm < 2.5mm", "2 hours ago", Coral500),
-                Triple("Dove Shampoo · Missing consumer care contact", "Yesterday", Coral500),
-                Triple("XYZ Biscuits · Non-standard pack size 347g", "2 days ago", Amber500),
+                Triple("Lays Classic 26g · MRP font 1.8mm < 2.5mm", "2 hours ago", Crimson600),
+                Triple("Dove Shampoo · Missing consumer care contact", "Yesterday", Crimson600),
+                Triple("XYZ Biscuits · Non-standard pack size 347g", "2 days ago", Amber600),
             ).forEach { (text, time, color) ->
                 Card(
-                    colors = CardDefaults.cardColors(containerColor = Navy800),
+                    colors = CardDefaults.cardColors(
+                        containerColor = Color.White
+                    ),
                     shape = RoundedCornerShape(12.dp),
-                    modifier = Modifier.fillMaxWidth().padding(bottom = 8.dp)
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 8.dp)
+                        .shadow(
+                            elevation = 2.dp,
+                            shape = RoundedCornerShape(12.dp),
+                            spotColor = Color.Black.copy(alpha = 0.05f)
+                        )
                 ) {
                     Row(
-                        modifier = Modifier.padding(14.dp),
+                        modifier = Modifier.padding(16.dp),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Icon(Icons.Default.Warning, null, tint = color, modifier = Modifier.size(18.dp))
+                        Icon(
+                            Icons.Default.Warning,
+                            null,
+                            tint = color,
+                            modifier = Modifier.size(20.dp)
+                        )
                         Spacer(Modifier.width(12.dp))
                         Column(modifier = Modifier.weight(1f)) {
-                            Text(text, style = MaterialTheme.typography.bodySmall)
-                            Text(time, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                            Text(
+                                text,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onBackground
+                            )
+                            Spacer(Modifier.height(2.dp))
+                            Text(
+                                time,
+                                style = MaterialTheme.typography.labelSmall,
+                                color = TextSecondary
+                            )
                         }
                     }
                 }
@@ -250,9 +302,17 @@ private fun AnimatedStatCard(label: String, targetValue: Int, color: Color) {
     }
 
     Card(
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
+        colors = CardDefaults.cardColors(
+            containerColor = color.copy(alpha = 0.08f)
+        ),
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.width(110.dp)
+        modifier = Modifier
+            .width(120.dp)
+            .shadow(
+                elevation = 2.dp,
+                shape = RoundedCornerShape(16.dp),
+                spotColor = color.copy(alpha = 0.1f)
+            )
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -268,7 +328,8 @@ private fun AnimatedStatCard(label: String, targetValue: Int, color: Color) {
             Text(
                 label,
                 style = MaterialTheme.typography.labelSmall,
-                color = color.copy(alpha = 0.8f)
+                color = color.copy(alpha = 0.9f),
+                fontWeight = FontWeight.SemiBold
             )
         }
     }
@@ -284,22 +345,43 @@ private fun ActionCard(
     onClick: () -> Unit
 ) {
     Card(
-        colors = CardDefaults.cardColors(containerColor = color.copy(alpha = 0.1f)),
+        colors = CardDefaults.cardColors(
+            containerColor = color.copy(alpha = 0.08f)
+        ),
         shape = RoundedCornerShape(16.dp),
         modifier = modifier
-            .height(90.dp)
+            .height(110.dp)
             .clickable { onClick() }
+            .shadow(
+                elevation = 2.dp,
+                shape = RoundedCornerShape(16.dp),
+                spotColor = color.copy(alpha = 0.1f)
+            )
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(14.dp),
+                .padding(16.dp),
             verticalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(icon, null, tint = color, modifier = Modifier.size(24.dp))
+            Icon(
+                icon,
+                null,
+                tint = color,
+                modifier = Modifier.size(28.dp)
+            )
             Column {
-                Text(title, style = MaterialTheme.typography.labelLarge, color = color, fontWeight = FontWeight.Bold)
-                Text(subtitle, style = MaterialTheme.typography.labelSmall, color = color.copy(0.7f))
+                Text(
+                    title,
+                    style = MaterialTheme.typography.labelLarge,
+                    color = color,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    subtitle,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = color.copy(0.8f)
+                )
             }
         }
     }
