@@ -57,3 +57,25 @@ val TextTertiary    = Color(0xFF94A3B8)  // Slate 500 for disabled/hint
 val ArReticleTint   = Color(0xFF059669)  // Emerald for locked state
 val ArSearchTint    = Color(0xFF3B82F6)  // Cobalt for searching
 val ArGlassPanel    = Color(0xCCF8FAFC)  // 80% opacity light slate for glass panels
+
+// --- Legacy Color Aliases (for backward compatibility across screens) ---
+val Indigo900 = Slate950
+val Indigo700 = Slate900
+val Indigo500 = Cobalt600
+val Indigo400 = Cobalt500
+val Indigo200 = Cobalt100
+
+val Navy950   = Slate950
+val Navy900   = Slate900
+val Navy800   = Slate800
+val Navy700   = Slate700
+val Navy600   = Slate600
+
+val Coral500  = Crimson600
+val Coral400  = Crimson500
+
+val White     = Color.White
+val Gray100   = Slate100
+val Gray300   = Slate300
+val Gray500   = Slate500
+val Gray700   = Slate700
