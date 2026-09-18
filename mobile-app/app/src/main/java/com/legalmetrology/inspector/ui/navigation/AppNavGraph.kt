@@ -84,9 +84,9 @@ fun AppNavGraph(navController: NavHostController) {
 
         composable(Screen.Onboarding.route) {
             OnboardingScreen(
-                onProceedToScan = { packageType, category, productName ->
+                onProceedToScan = { packageType, category ->
                     navController.navigate(
-                        Screen.Scan.createRoute(packageType.name, category.name, productName)
+                        Screen.Scan.createRoute(packageType.name, category.name)
                     )
                 },
                 onBack = { navController.navigateUp() }
@@ -96,12 +96,10 @@ fun AppNavGraph(navController: NavHostController) {
         composable(Screen.Scan.route) { backStackEntry ->
             val packageType = backStackEntry.arguments?.getString("packageType") ?: "RETAIL"
             val category = backStackEntry.arguments?.getString("category") ?: "GENERAL"
-            val productName = backStackEntry.arguments?.getString("productName") ?: ""
 
             ScanScreen(
                 packageType = packageType,
                 category = category,
-                productName = java.net.URLDecoder.decode(productName, "UTF-8"),
                 onProceedToReview = { inspectionId ->
                     navController.navigate(Screen.Review.createRoute(inspectionId))
                 },
